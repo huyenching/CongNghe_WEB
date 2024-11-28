@@ -1,30 +1,3 @@
-<?php
-
-session_start();
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $name = $_POST["name"];
-    $description = $_POST["description"];
-    $image = $_FILES["image"];
-    if(!isset($_SESSION["flowers"])){
-        $_SESSION["flowers"] = array();
-    }
-    $targetDir = "images/";
-    $targetFile = $targetDir . basename($image["name"]);
-
-    // Kiểm tra và upload file
-    if (move_uploaded_file($image["tmp_name"], $targetFile)) {
-        // Lưu vào session
-        $_SESSION["flowers"][] = array(
-            'name' => $name,
-            'description' => $description,
-            'image' => $targetFile
-        );
-    } else {
-        echo "Không thể upload hình ảnh!";
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body>
 
-<form method="POST" action="" enctype="multipart/form-data">
+<form method="POST" action="main.php?admin=1" enctype="multipart/form-data">
     <div class="form-group">
         <label for="name">Tên Hoa:</label>
         <input type="text" name="name" id="name" class="form-control" required>
