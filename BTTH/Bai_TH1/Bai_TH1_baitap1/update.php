@@ -34,7 +34,7 @@ $image = $_GET['image'] ?? '';
         <input type="file" name="image" id="image" class="form-control-file" >
     </div>
     <input type="text" name="old_image" value="<?= htmlspecialchars($image) ?>"> <!-- Lưu ảnh cũ để xử lý khi không thay đổi ảnh -->
-    <button type="submit" name="add_flower" class="btn btn-primary">Thêm</button>
+    <button type="submit" name="add_flower" class="btn btn-primary">Cập nhật</button>
 </form>
 
 
