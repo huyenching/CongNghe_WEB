@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('hardware_devices', function (Blueprint $table) {
             $table->id();
+            $table->string('device_name');
+            $table->string('type');
+            $table->boolean('status')->default(true); 
+            $table->foreign('center_id')->references('id')->on('it_centers')->onDelete('cascade');
             $table->timestamps();
         });
     }

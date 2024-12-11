@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('director');
+            $table->date('release_date'); 
+            $table->integer('duration');
             $table->timestamps();
+            $table->foreign('cinema_id')->references('id')->on('cinemas')->onDelete('cascade');
+
         });
     }
 
