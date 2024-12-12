@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('classes', function (Blueprint $table) {
             $table->id();
-            $table->integer('library_id');
-            $table->string('title');
-            $table->string('author');
-            $table->integer('publication_year');
-            $table->string('genre');
-            $table->foreign('library_id')->references('id')->on('libraries')->onDelete('cascade');
+            $table->enum('grade_level', ['Pre-K', 'Kindergarten']);
+            $table->string('room_number');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('classes');
     }
 };
