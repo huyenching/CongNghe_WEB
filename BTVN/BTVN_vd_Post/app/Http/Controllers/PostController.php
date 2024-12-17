@@ -3,30 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Post;
 
-
-class HomeController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-            $data = DB::table('issues')
-                ->leftJoin('computers', 'issues.computer_id', '=', 'computers.id')
-                ->select(
-                    'issues.reported_by',
-                    'issues.reported_date',
-                    'issues.description',
-                    'issues.urgency',
-                    'computers.computer_name',
-                )
-                ->get();
-            return view('home', compact('data'));
-        }
-    
-
+        $posts = Post::all();
+        return view("home", compact("posts"));
+    }
 
     /**
      * Show the form for creating a new resource.

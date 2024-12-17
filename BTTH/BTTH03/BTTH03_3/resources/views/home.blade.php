@@ -1,164 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Bootstrap Table with Add and Delete Row Feature</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách sự cố máy tính</title>
     <style>
-        body {
-            color: #404E67;
-            background: #F5F7FA;
-            font-family: 'Open Sans', sans-serif;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-
-        .table-wrapper {
-            width: 700px;
-            margin: 30px auto;
-            background: #fff;
-            padding: 20px;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
         }
-
-        .table-title {
-            padding-bottom: 10px;
-            margin: 0 0 10px;
+        th {
+            background-color: #f4f4f4;
         }
-
-        .table-title h2 {
-            margin: 6px 0 0;
-            font-size: 22px;
-        }
-
-        .table-title .add-new {
-            float: right;
-            height: 30px;
-            font-weight: bold;
-            font-size: 12px;
-            text-shadow: none;
-            min-width: 100px;
-            border-radius: 50px;
-            line-height: 13px;
-        }
-
-        .table-title .add-new i {
-            margin-right: 4px;
-        }
-
-        table.table {
-            table-layout: fixed;
-        }
-
-        table.table tr th,
-        table.table tr td {
-            border-color: #e9e9e9;
-        }
-
-        table.table th i {
-            font-size: 13px;
-            margin: 0 5px;
-            cursor: pointer;
-        }
-
-        table.table th:last-child {
-            width: 100px;
-        }
-
-        table.table td a {
-            cursor: pointer;
-            display: inline-block;
-            margin: 0 5px;
-            min-width: 24px;
-        }
-
-        table.table td a.add {
-            color: #27C46B;
-        }
-
-        table.table td a.edit {
-            color: #FFC107;
-        }
-
-        table.table td a.delete {
-            color: #E34724;
-        }
-
-        table.table td i {
-            font-size: 19px;
-        }
-
-        table.table td a.add i {
-            font-size: 24px;
-            margin-right: -1px;
-            position: relative;
-            top: 3px;
-        }
-
-        table.table .form-control {
-            height: 32px;
-            line-height: 32px;
-            box-shadow: none;
-            border-radius: 2px;
-        }
-
-        table.table .form-control.error {
-            border-color: #f50000;
-        }
-
-        table.table td .add {
-            display: none;
+        tr:hover {
+            background-color: #f1f1f1;
         }
     </style>
 </head>
-
 <body>
-    <div class="container-lg">
-        <div class="table-responsive">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <h2>Tin Tức</h2>
-                        </div>
-                        <div class="col-sm-4">
-                            <a href=" ../views/add.php"><button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button></a>
-                        </div>
-                    </div>
-                </div>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Content</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($posts as $post)
-                        <tr>
-                            <td>{{ $post->id }}</td>
-                            <td>{{ $post->title }}</td>
-                            <td>{{ $post->content }}</td>
-                            <td>
-                                <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</body>
 
+    <h1>Danh sách sự cố máy tính</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Người báo cáo</th>
+                <th>Ngày báo cáo</th>
+                <th>Mô tả sự cố</th>
+                <th>Mức độ khẩn cấp</th>
+                <th>Tên máy tính</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($data as $key => $item)
+                <tr>
+                    <td>{{ $key + 1 }}</td> <!-- Số thứ tự -->
+                    <td>{{ $item->reported_by }}</td> <!-- Người báo cáo -->
+                    <td>{{ date('d/m/Y H:i', strtotime($item->reported_date)) }}</td> <!-- Ngày báo cáo (định dạng dd/mm/yyyy hh:mm) -->
+                    <td>{{ $item->description }}</td> <!-- Mô tả sự cố -->
+                    <td>
+                        @if ($item->urgency === 'High')
+                            <span style="color: red; font-weight: bold;">Khẩn cấp</span>
+                        @elseif ($item->urgency === 'Medium')
+                            <span style="color: orange; font-weight: bold;">Trung bình</span>
+                        @else
+                            <span style="color: green; font-weight: bold;">Thấp</span>
+                        @endif
+                    </td> <!-- Mức độ khẩn cấp -->
+                    <td>{{ $item->computer_name }}</td> <!-- Tên máy tính -->
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6" style="text-align: center;">Không có dữ liệu</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+
+</body>
 </html>
