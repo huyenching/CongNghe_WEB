@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class IssuesController extends Controller
 {
     public function index(){
-        $data = Issues::with('computer')->paginate(5);
+        $data = Issues::with('computer')->paginate(10);
         return view("issues.index",compact("data"));
     }
     public function create(){ 
